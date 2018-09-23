@@ -13,8 +13,12 @@ import { Button } from 'react-native-elements';
 import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
+import { createStackNavigator } from 'react-navigation';
 
-export default class HomeScreen extends React.Component {
+import PersonalInfo from './PersonalInfo';
+
+
+class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
@@ -49,7 +53,9 @@ export default class HomeScreen extends React.Component {
             color='#f8f9fa'
             backgroundColor='#1503ff'
             fontFamily='raleway'
-            buttonStyle={styles.btnGettingStarted} />
+            buttonStyle={styles.btnGettingStarted}
+            onPress={() => this.props.navigation.navigate('Personal')}
+            />
         </View>
       </View>
     );
@@ -87,6 +93,18 @@ export default class HomeScreen extends React.Component {
       'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes'
     );
   };
+}
+//navigator to navigate through all the screeens that we have
+//Pass props and update state here
+const RootStack = createStackNavigator({
+  Home: HomeScreen,
+  Personal: PersonalInfo
+})
+
+export default class Home extends React.Component{
+  render(){
+    return <RootStack />
+  }
 }
 
 const styles = StyleSheet.create({
